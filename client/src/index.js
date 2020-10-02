@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import './index.css';
-import { Page } from './pages/Page';
 import * as serviceWorker from './serviceWorker';
+import { Routes } from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Page />
+    <Router>
+        <Routes />
+      </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
