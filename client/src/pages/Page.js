@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Header } from '../components/Header/Header';
+import { ApplicationBar } from '../components/ApplicationBar/ApplicationBar';
+import { Article } from '../components/Article/Article'
 import './page.css';
 
-const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (
+const standardArticle = {
+  title: 'This is an example title',
+  body: 'Render pages with mock data. This makes it easy to build and review page states without\
+        needing to navigate to them in your app. Here are some handy patterns for managing page data\
+        in Storybook:',
+}
+const Page = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
   <article>
-    <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />
+    <ApplicationBar title={title} user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />
 
     <section>
       <h2>Pages in Storybook</h2>
@@ -42,6 +49,9 @@ const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (
           docs
         </a>
         .
+      </p>
+      <p>
+        <Article article={standardArticle}/>
       </p>
       <div className="tip-wrapper">
         <span className="tip">Tip</span> Adjust the width of the canvas with the{' '}

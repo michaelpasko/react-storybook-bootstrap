@@ -17,3 +17,7 @@ Detail.args = {
   },
 };
 
+export const Defaults = Template.bind({});
+Defaults.args = {
+  article: {},
+};
