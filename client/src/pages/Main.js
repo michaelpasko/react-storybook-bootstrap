@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { ApplicationBar } from '../components/ApplicationBar/ApplicationBar';
 import { Article } from '../components/Article/Article'
-import './page.css';
+import './main.css';
 
 const standardArticle = {
   title: 'This is an example title',
@@ -11,7 +11,7 @@ const standardArticle = {
         needing to navigate to them in your app. Here are some handy patterns for managing page data\
         in Storybook:',
 }
-const Page = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
+const Main = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
   <article>
     <ApplicationBar title={title} user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />
 
@@ -69,17 +69,17 @@ const Page = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
     </section>
   </article>
 );
-Page.propTypes = {
+Main.propTypes = {
   user: PropTypes.shape({}),
   onLogin: PropTypes.func.isRequired,
   onLogout: PropTypes.func.isRequired,
   onCreateAccount: PropTypes.func.isRequired,
 };
 
-Page.defaultProps = {
+Main.defaultProps = {
   user: null,
 };
 
 export {
-  Page
+  Main
 }
