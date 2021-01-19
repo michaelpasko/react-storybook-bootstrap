@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Main } from './Main';
-import * as HeaderStories from '../components/Header/Header.stories';
+import * as ApplicationBarStories from '../components/ApplicationBar/ApplicationBar.stories';
 
 export default {
-  title: 'Pages/Application',
+  title: 'Pages/Main',
   component: Main,
 };
 
@@ -12,10 +12,10 @@ const Template = (args) => <Main {...args} />;
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
-  ...HeaderStories.LoggedIn.args,
+  ...ApplicationBarStories.UserLoggedIn.args,
 };
 
 export const LoggedOut = Template.bind({});
 LoggedOut.args = {
-  ...HeaderStories.LoggedOut.args,
+  ...ApplicationBarStories.NoUser.args,
 };
