@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { ApplicationBar } from '../components/ApplicationBar/ApplicationBar';
 import { Article } from '../components/Article/Article'
 import './main.css';
+import { addTodo } from '../redux/actions';
 
 const standardArticle = {
   title: 'This is an example title',
@@ -78,6 +79,9 @@ Main.propTypes = {
 
 Main.defaultProps = {
   user: null,
+  onLogin: () => { addTodo(); },
+  onLogout: () => { addTodo(); },
+  onCreateAccount: () => { addTodo(); }
 };
 
 export {

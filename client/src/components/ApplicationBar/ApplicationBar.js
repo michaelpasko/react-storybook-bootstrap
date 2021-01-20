@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import { connect } from 'react-redux';
+import { addTodo } from '../../redux/actions';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -26,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const ApplicationBar =  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
+const ApplicationBar =  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
   const classes = useStyles();
 
   return (
@@ -70,3 +73,18 @@ ApplicationBar.defaultProps = {
   title: 'Default Title',
   user: null
 };
+
+const mapStateToProps = (state /*, ownProps*/) => {
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addTodo: todoId => dispatch(addTodo)
+  }
+};
+
+connect(mapStateToProps, mapDispatchToProps)(ApplicationBar);
+
+export {
+  ApplicationBar
+}
