@@ -1,10 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ApplicationBar } from '../components/ApplicationBar/ApplicationBar';
-import { Article } from '../components/Article/Article'
+// Material UI
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
+
+import { ApplicationBar } from '../../components/ApplicationBar/ApplicationBar';
+import { Article } from '../../components/Article/Article'
+import { login as actionLogin } from '../../redux/actions';
 import './main.css';
-import { addTodo } from '../redux/actions';
+
+// Util
+//import { login } from '../util/auth';
+
+
+// UI Handlers
+const handleLogin = (eventPayload) => {
+  console.log('----- Debugging handleLogin -------');
+  open=true;
+  actionLogin('TestUser', 'TestPass');
+}
+
+const handleClose = (eventPayload) => {
+  console.log('----- Debugging handleClose -------');
+}
+
+const handleLogout = (eventPayload) => {
+  console.log('----- Debugging handleLogout -------');
+}
+
+const handleOnCreateAccount = (eventPayload) => {
+  console.log('----- Close dialog -------');
+
+}
+
+let open = false;
 
 const standardArticle = {
   title: 'This is an example title',
@@ -12,9 +48,9 @@ const standardArticle = {
         needing to navigate to them in your app. Here are some handy patterns for managing page data\
         in Storybook:',
 }
-const Main = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
+const Main = ({ title = 'Ovallis', user }) => (
   <article>
-    <ApplicationBar title={title} user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />
+    <ApplicationBar title={title} user={user} onLogin={handleLogin} onLogout={handleLogout} onCreateAccount={handleOnCreateAccount} />
 
     <section>
       <h2>Pages in Storybook</h2>
@@ -51,9 +87,7 @@ const Main = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
         </a>
         .
       </p>
-      <p>
-        <Article article={standardArticle}/>
-      </p>
+      <Article article={standardArticle}/>
       <div className="tip-wrapper">
         <span className="tip">Tip</span> Adjust the width of the canvas with the{' '}
         <svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -68,20 +102,42 @@ const Main = ({ title, user, onLogin, onLogout, onCreateAccount }) => (
         Viewports addon in the toolbar
       </div>
     </section>
+
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here. We will send updates
+            occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Subscribe
+          </Button>
+        </DialogActions>
+      </Dialog>
   </article>
 );
 Main.propTypes = {
-  user: PropTypes.shape({}),
-  onLogin: PropTypes.func.isRequired,
-  onLogout: PropTypes.func.isRequired,
-  onCreateAccount: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  user: PropTypes.shape({})
 };
 
 Main.defaultProps = {
+  title: 'Test',
   user: null,
-  onLogin: () => { addTodo(); },
-  onLogout: () => { addTodo(); },
-  onCreateAccount: () => { addTodo(); }
 };
 
 export {

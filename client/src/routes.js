@@ -1,7 +1,8 @@
 import React from 'react';
-import { Main } from './pages/Main';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+// Pages
+import { Main } from './pages/Main/Main';
 export const Routes = () => {
   return (
     <div>

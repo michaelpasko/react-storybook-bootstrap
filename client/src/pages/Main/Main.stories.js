@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Main } from './Main';
-import * as ApplicationBarStories from '../components/ApplicationBar/ApplicationBar.stories';
+import * as ApplicationBarStories from '../../components/ApplicationBar/ApplicationBar.stories';
 
 export default {
   title: 'Pages/Main',

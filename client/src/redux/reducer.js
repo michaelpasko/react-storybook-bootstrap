@@ -1,6 +1,9 @@
+
+import { combineReducers } from 'redux';
+
 import { actionTypes } from './actionTypes';
 
-const { ADD_TODO } = actionTypes;
+const { AUTH_LOGIN } = actionTypes;
 
 const initialState = {
     todos: [
@@ -14,11 +17,24 @@ const initialState = {
     }
   };
   
+
+/*const todoApp = combineReducers({
+  todos,
+});*/
   // Use the initialState as a default value
   export default function appReducer(state = initialState, action) {
+
+    console.info('Reducer called')
+    console.log(action);
     // The reducer normally looks at the action type field to decide what happens
     switch (action.type) {
-        case ADD_TODO: state.test='Test'; return state;
+        case AUTH_LOGIN: {
+          console.info('LOGGED IN');
+          return {
+            // that has all the existing state data
+            ...state,
+          };
+        }
         // Do something here based on the different types of actions
         default:
             // If this reducer doesn't recognize the action type, or doesn't

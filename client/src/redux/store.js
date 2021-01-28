@@ -14,4 +14,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_D
 
 const store = createStore(rootReducer, preloadedState, composeEnhancers);
 
-export default store;
+const dispatch = (action, payload) => {
+  console.info('------ Dispatching ${action}');
+  store.dispatch({type: action, payload });
+}
+export {
+  dispatch,
+  store
+};

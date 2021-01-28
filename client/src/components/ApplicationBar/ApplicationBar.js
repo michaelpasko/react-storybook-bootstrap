@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { connect } from 'react-redux';
-import { addTodo } from '../../redux/actions';
+import { login as actionLogin } from '../../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 
 const ApplicationBar =  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
   const classes = useStyles();
@@ -78,8 +79,9 @@ const mapStateToProps = (state /*, ownProps*/) => {
 };
 
 const mapDispatchToProps = dispatch => {
+  console.log('Match dispatch to props in application bar');
   return {
-    addTodo: todoId => dispatch(addTodo)
+    onLogin: (username, password) => dispatch(actionLogin(username, password))
   }
 };
 
