@@ -1,9 +1,5 @@
-
-import { combineReducers } from 'redux';
-
-import { actionTypes } from './actionTypes';
-
-const { AUTH_LOGIN } = actionTypes;
+import { AUTH_LOGIN } from '../actionTypes';
+import log from '../../util/logger';
 
 const initialState = {
     todos: [
@@ -17,15 +13,10 @@ const initialState = {
     }
   };
   
+export default function loginReducer(state = initialState, action) {
 
-/*const todoApp = combineReducers({
-  todos,
-});*/
-  // Use the initialState as a default value
-  export default function appReducer(state = initialState, action) {
-
-    console.info('Reducer called')
-    console.log(action);
+    log.info('======== Login Reducer called ==============')
+    log.debug(action);
     // The reducer normally looks at the action type field to decide what happens
     switch (action.type) {
         case AUTH_LOGIN: {

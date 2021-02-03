@@ -22,7 +22,7 @@ const fakeDatabase = {
 const delay = (ms) =>
   new Promise(resolve => setTimeout(resolve, ms));
 
-const apiCall = (filter) =>
+const get = (filter) =>
   delay(500).then(() => {
     switch (filter) {
       case 'all':
@@ -37,5 +37,5 @@ const apiCall = (filter) =>
   });
 
 export {
-    apiCall
+    get
 }

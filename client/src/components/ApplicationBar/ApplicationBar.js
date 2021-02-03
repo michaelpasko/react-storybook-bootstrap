@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { connect } from 'react-redux';
 import { login as actionLogin } from '../../redux/actions';
+import log from '../../util/logger';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,7 +80,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  console.log('Match dispatch to props in application bar');
+  log.debug('Match dispatch to props in application bar');
   return {
     onLogin: (username, password) => dispatch(actionLogin(username, password))
   }

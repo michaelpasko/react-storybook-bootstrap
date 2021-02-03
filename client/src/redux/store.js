@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import rootReducer from './reducer';
+import rootReducer from './reducers/index';
 
 let preloadedState = {};
 const persistedStore = localStorage.getItem('reduxStore');
@@ -15,7 +15,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_D
 const store = createStore(rootReducer, preloadedState, composeEnhancers);
 
 const dispatch = (action, payload) => {
-  console.info('------ Dispatching ${action}');
+  console.info(`------ Dispatching ${action}`);
   store.dispatch({type: action, payload });
 }
 export {
