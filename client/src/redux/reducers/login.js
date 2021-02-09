@@ -1,4 +1,4 @@
-import { AUTH_LOGIN } from '../actionTypes';
+import { AUTH_LOGIN, AUTH_AUTHENTICATED } from '../actionTypes';
 import log from '../../util/logger';
 
 const initialState = {
@@ -20,7 +20,14 @@ export default function loginReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
     switch (action.type) {
         case AUTH_LOGIN: {
-          console.info('LOGGED IN');
+          console.info('Logging in');
+          return {
+            // that has all the existing state data
+            ...state,
+          };
+        }
+        case AUTH_AUTHENTICATED: {
+          log.debug('Authenticated, move to main page');
           return {
             // that has all the existing state data
             ...state,

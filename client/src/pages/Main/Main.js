@@ -13,7 +13,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { ApplicationBar } from '../../components/ApplicationBar/ApplicationBar';
 import { Article } from '../../components/Article/Article'
-import { login as actionLogin } from '../../redux/actions';
+//import { login as actionLogin } from '../../redux/actions';
+import { login as actionLogin } from '../../redux/thunks/loginThunk';
 import log from '../../util/logger';
 
 

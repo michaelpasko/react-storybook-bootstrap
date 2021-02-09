@@ -1,5 +1,5 @@
 // redux/actions.js
-import uuid from 'uuid';
+import {v4 as uuid} from 'uuid';
 import { AUTH_LOGIN } from './actionTypes';
 import log from '../util/logger';
 
