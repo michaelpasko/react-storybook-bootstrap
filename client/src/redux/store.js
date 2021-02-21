@@ -29,10 +29,11 @@ if (persistedStore) {
 const devTools = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const composeEnhancers = compose(applyMiddleware(asyncFunctionMiddleware) , devTools);
 
+// Create the Redux Store
 const store = createStore(rootReducer, preloadedState, composeEnhancers);
 
 /**
- * Abstract dispatch to add functionality to store dispatch
+ * Abstract dispatch to add functionality to store dispatch, and create a layer of abstraction for future functionality
  * @param {*} action
  * @param {*} payload
  */

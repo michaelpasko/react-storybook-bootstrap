@@ -10,7 +10,7 @@ const login = (username, password) => {
       // Now we can use the text value and send it to the server
       const loginAPI = { username, password };
 
-    log.debug('Calling login server.');
+      log.debug('Calling login server.');
       const response = await http.get('https://www.ovallis.com/api/v1/status');
       dispatch({ type: 'login/authenticated', payload: response })
     }
