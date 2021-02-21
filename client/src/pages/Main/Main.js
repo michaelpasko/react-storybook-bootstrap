@@ -10,6 +10,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+// Internationalization
+import { useTranslation } from "react-i18next";
 
 import { ApplicationBar } from '../../components/ApplicationBar/ApplicationBar';
 import { Article } from '../../components/Article/Article'
@@ -21,12 +23,6 @@ import log from '../../util/logger';
 import { dispatch } from '../../redux/store';
 import './main.css';
 
-// Util
-//import { login } from '../util/auth';
-
-
-
-
 const standardArticle = {
   title: 'This is an example title',
   body: 'Render pages with mock data. This makes it easy to build and review page states without\
@@ -34,6 +30,11 @@ const standardArticle = {
         in Storybook:',
 }
 const Main = ({ title = 'Ovallis', user }) => {
+  const { t, i18n } = useTranslation();
+
+  // Change language to show german in locales/ger/transation.json
+  i18n.changeLanguage('ger');
+
   // Declare a new state variable, which we'll call "count"
   const [open, setOpen] = useState(false);
 
@@ -62,10 +63,11 @@ const Main = ({ title = 'Ovallis', user }) => {
 
   return (
     <article>
-      <ApplicationBar title={title} user={user} onLogin={handleLogin} onLogout={handleLogout} onCreateAccount={handleOnCreateAccount} />
+      <ApplicationBar title={t('main_appbar_title')} user={user} onLogin={handleLogin} onLogout={handleLogout} onCreateAccount={handleOnCreateAccount} />
 
       <section>
         <h2>Pages in Storybook</h2>
+        <p>German: {t("main_introduction")}</p>
         <p>
           We recommend building UIs with a{' '}
           <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
