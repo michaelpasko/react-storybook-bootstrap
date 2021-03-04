@@ -42,8 +42,13 @@ const dispatch = (action, payload) => {
     log.debug(`------ Dispatching thunk -----`);
     store.dispatch(action);
   } else {
-    log.debug(`------ Dispatching ${action}`);
-    store.dispatch({type: action, payload });
+    if (action && action.type && action.payload) {
+      log.debug(`------ Dispatching action/payload ${action}`);
+      store.dispatch({type: action.type, payload: action.payload });
+    } else {
+      log.debug(`------ Dispatching ${action}`);
+      store.dispatch({type: action, payload });
+    }
   }
 };
 

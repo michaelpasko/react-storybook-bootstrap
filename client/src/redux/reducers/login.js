@@ -20,7 +20,7 @@ export default function loginReducer(state = initialState, action) {
     // The reducer normally looks at the action type field to decide what happens
     switch (action.type) {
         case AUTH_LOGIN: {
-          console.info('Logging in');
+          log.info('Logging in');
           return {
             // that has all the existing state data
             ...state,

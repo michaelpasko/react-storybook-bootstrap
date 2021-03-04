@@ -1,6 +1,6 @@
 // redux/actions.js
 import {v4 as uuid} from 'uuid';
-import { AUTH_LOGIN } from './actionTypes';
+import { AUTH_LOGIN, INTL_CHANGE_LANGUAGE } from './actionTypes';
 import log from '../util/logger';
 
 const login = (username, password) => {
@@ -16,7 +16,14 @@ const login = (username, password) => {
   };
 };
 
+const changeLanguage = (locale) => {
+  return {
+    type: INTL_CHANGE_LANGUAGE,
+    payload: locale
+  };
+}
 
 export {
-  login
+  login,
+  changeLanguage
 }

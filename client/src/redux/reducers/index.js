@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 
 
 // Reducers
-import loginReducer from './login';
+import login from './login';
+import il8n  from './il8n';
 
 
 const appReducer = combineReducers({
-  loginReducer,
+  login,
+  il8n,
 });
 
 export default appReducer;

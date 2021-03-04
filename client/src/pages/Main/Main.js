@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI
@@ -14,13 +14,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { withTranslation } from "react-i18next";
 
 import { ApplicationBar } from '../../components/ApplicationBar/ApplicationBar';
-import { Article } from '../../components/Article/Article'
-//import { login as actionLogin } from '../../redux/actions';
-import { login as actionLogin } from '../../redux/thunks/loginThunk';
+import { Article } from '../../components/Article/Article';
+
 import log from '../../util/logger';
 
-
+// Redux
+import { connect } from 'react-redux';
 import { dispatch } from '../../redux/store';
+import { login as actionLogin } from '../../redux/thunks/loginThunk';
+import { changeLanguage as actionChangeLanguage } from '../../redux/actions';
+
 import './main.css';
 
 const standardArticle = {
@@ -30,16 +33,34 @@ const standardArticle = {
         in Storybook:',
 }
 
+/**
+ * Main entry page for the Application
+ */
 class Main extends React.Component {
   constructor(props) {
     super(props);
-
-
-    // Change language to show german in locales/ger/transation.json
-    //props.i18n.changeLanguage('ger');
-    this.state= { open: false };
-
+    this.state= { open: false, isGerman: this.props.isGerman };
   }
+
+  static propTypes = {
+    title: PropTypes.string,
+    user: PropTypes.shape({}),
+    isGerman: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    title: 'Test - DEFAULT!',
+    user: null,
+    isGerman: false
+  };
+
+  // Component lifecycle
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      ...prevState,
+     isGerman: nextProps.isGerman
+    };
+   }
 
   // UI Handlers
  handleLogin = (eventPayload) => {
@@ -60,18 +81,32 @@ class Main extends React.Component {
     log.debug('----- Debugging handleLogout -------');
   }
 
+  handleLanguageChange = (eventPayload) => {
+    log.debug('----- Debugging handleLogout -------');
+    if (this.state.isGerman) {
+      dispatch(actionChangeLanguage('en'));
+    } else {
+      dispatch(actionChangeLanguage('ger'));
+    }
+  }
+
   handleOnCreateAccount = (eventPayload) => {
     log.debug('----- Close dialog -------');
   }
-
   render = () => {
     return (
       <article>
         <ApplicationBar title={this.props.t('main_appbar_title')} user={this.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
   
         <section>
-          <h2>Pages in Storybook</h2>
-          <p>German: {this.props.t("main_introduction")}</p>
+          <div>
+            <Button variant="contained" color="primary" onClick={this.handleLanguageChange}>{this.props.t("main_change_language_button")}</Button>
+          </div>
+          <h2>{this.props.t("main_header")}</h2>
+          <p>
+            {this.props.t("main_introduction")}
+          </p>
+          <p> {this.props.t("main_title", { title:this.props.title })}</p>
           <p>
             We recommend building UIs with a{' '}
             <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
@@ -80,18 +115,14 @@ class Main extends React.Component {
             process starting with atomic components and ending with pages.
           </p>
           <p>
-            Render pages with mock data. This makes it easy to build and review page states without
-            needing to navigate to them in your app. Here are some handy patterns for managing page data
-            in Storybook:
+            {this.props.t("main_render_with_mock")}
           </p>
           <ul>
             <li>
-              Use a higher-level connected component. Storybook helps you compose such data from the
-              "args" of child component stories
+              {this.props.t("main_render_higher_level")}
             </li>
             <li>
-              Assemble data in the page component from your services. You can mock these services out
-              using Storybook.
+              {this.props.t("main_render_assemble_data")}
             </li>
           </ul>
           <p>
@@ -122,10 +153,10 @@ class Main extends React.Component {
         </section>
   
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+            <DialogTitle id="form-dialog-title">{this.props.t("login_form_title")}</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Provide your email and password to login to this website
+                {this.props.t("login_form_email_password")}
               </DialogContentText>
               <TextField
                 autoFocus
@@ -145,10 +176,10 @@ class Main extends React.Component {
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
-                Cancel
+                {this.props.t("login_form_cancel_button")}
               </Button>
               <Button onClick={this.handleLoginCheck} color="primary">
-                Login
+                {this.props.t("login_form_login_button")}
               </Button>
             </DialogActions>
           </Dialog>
@@ -157,14 +188,12 @@ class Main extends React.Component {
   }
 };
 
-Main.propTypes = {
-  title: PropTypes.string,
-  user: PropTypes.shape({})
+const mapStateToProps = (state , ownProps) => {
+  log.debug('----- Mapping Redux State to Props-------');
+  return {
+    ...ownProps,
+    isGerman: state.il8n.isGerman
+  }
 };
 
-Main.defaultProps = {
-  title: 'Test',
-  user: null,
-};
-
-export default withTranslation()(Main);
+export default connect(mapStateToProps)(withTranslation()(Main));
