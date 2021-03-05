@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // Material UI
@@ -60,26 +61,26 @@ class Main extends React.Component {
       ...prevState,
      isGerman: nextProps.isGerman
     };
-   }
+  };
 
   // UI Handlers
  handleLogin = (eventPayload) => {
     log.debug('----- Debugging handleLogin -------');
     this.setState({ ...this.state, open: true });
-  }
+  };
 
   handleLoginCheck = (username='Test', password='TestPass') => {
     dispatch(actionLogin('TestUser', 'TestPass'));
-  }
+  };
 
   handleClose = (eventPayload) => {
     this.setState({ ...this.state, open: false });
     log.debug('----- Debugging handleClose -------');
-  }
+  };
 
   handleLogout = (eventPayload) => {
     log.debug('----- Debugging handleLogout -------');
-  }
+  };
 
   handleLanguageChange = (eventPayload) => {
     log.debug('----- Debugging handleLogout -------');
@@ -88,12 +89,16 @@ class Main extends React.Component {
     } else {
       dispatch(actionChangeLanguage('ger'));
     }
-  }
+  };
 
   handleOnCreateAccount = (eventPayload) => {
     log.debug('----- Close dialog -------');
-  }
+  };
+
   render = () => {
+    const testLinkId = 234;
+    const query = new URLSearchParams(this.props.location.search);;//new URLSearchParams(locationURL.search);
+    const { id } = this.props.match.params;
     return (
       <article>
         <ApplicationBar title={this.props.t('main_appbar_title')} user={this.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
@@ -107,6 +112,20 @@ class Main extends React.Component {
             {this.props.t("main_introduction")}
           </p>
           <p> {this.props.t("main_title", { title:this.props.title })}</p>
+          <p>
+            <Link to={`/Home/${testLinkId}?name=testNameQueryParamExists`}>Link to Test URL & Query Parameters</Link>
+            <div>
+              {query && query.get('name') ? (
+                <h3>
+                  The <code>name</code> in the query string is &quot;{query.get('name')}
+                  &quot;
+                </h3>
+              ) : (
+                <h3>There is no name in the query string</h3>
+              )}
+              {id ? (<h3>Id found {id}</h3>) : (<h3>No id found</h3>)}
+            </div>
+          </p>
           <p>
             We recommend building UIs with a{' '}
             <a href="https://componentdriven.org" target="_blank" rel="noopener noreferrer">
@@ -196,4 +215,4 @@ const mapStateToProps = (state , ownProps) => {
   }
 };
 
-export default connect(mapStateToProps)(withTranslation()(Main));
+export default withRouter(connect(mapStateToProps)(withTranslation()(Main)));

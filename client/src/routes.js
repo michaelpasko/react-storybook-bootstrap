@@ -12,6 +12,7 @@ export const Routes = () => {
     <div>
       <Switch>
         <Route exact path="/Home" component={Main} />
+        <Route exact path="/Home/:id" component={Main} />
         <Route exact path="/">
           <Redirect to="/Home" />
         </Route>

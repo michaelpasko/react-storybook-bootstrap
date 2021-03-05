@@ -1,4 +1,14 @@
 {
     "main_introduction": "Dieser Abschnitt ist eine Lektion in il8n. Anzeigen der richtigen Sprache basierend auf dem Gebietsschema des Browsers",
-    "main_appbar_title": "AppBar-Titel"
+    "main_appbar_title": "AppBar-Titel",
+    "main_header": "Seiten im Bilderbuch",
+    "main_title": "Titel: {{title}}",
+    "main_change_language_button": "Sprache ändern",
+    "main_render_with_mock": "Seiten mit Scheindaten rendern. Auf diese Weise können Sie auf einfache Weise Seitenzustände erstellen und überprüfen, ohne in Ihrer App zu diesen navigieren zu müssen. Hier sind einige nützliche Muster zum Verwalten von Seitendaten in Storybook:",
+    "main_render_higher_level": "Verwenden Sie eine übergeordnete angeschlossene Komponente. Mit Storybook können Sie solche Daten aus den \"Argumenten\" von untergeordneten Komponentengeschichten zusammenstellen",
+    "main_render_assemble_data": "Stellen Sie Daten in der Seitenkomponente aus Ihren Diensten zusammen. Sie können diese Dienste mit Storybook verspotten.",
+    "login_form_email_password": "Geben Sie bitte Ihre E-Mail-Adresse und Ihr Passwort ein, um sich auf dieser Website anzumelden",
+    "login_form_title": "Abonnieren",
+    "login_form_cancel_button": "Stornieren",
+    "login_form_login_button": "Anmeldung"
 }
