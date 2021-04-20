@@ -1,4 +1,5 @@
 /client/node_modules
 /client/storybook-static
+client/stats.json
 /test/node_modules
 todo
