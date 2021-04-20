@@ -31,6 +31,7 @@ export default function loginReducer(state = initialState, action) {
           return {
             // that has all the existing state data
             ...state,
+            jwt: true
           };
         }
         // Do something here based on the different types of actions

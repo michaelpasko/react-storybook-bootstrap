@@ -59,9 +59,16 @@ class Main extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       ...prevState,
-     isGerman: nextProps.isGerman
+     isGerman: nextProps.isGerman,
     };
   };
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    log.debug('----- Debugging componentDidUpdate -------');
+    if (this.props.jwt && this.state.open) {
+      this.setState({ ...this.state, open: false });
+    }
+  }
 
   // UI Handlers
  handleLogin = (eventPayload) => {
@@ -210,8 +217,8 @@ class Main extends React.Component {
 const mapStateToProps = (state , ownProps) => {
   log.debug('----- Mapping Redux State to Props-------');
   return {
-    ...ownProps,
-    isGerman: state.il8n.isGerman
+    isGerman: state.il8n.isGerman,
+    jwt: state.login.jwt
   }
 };
 

@@ -1,5 +1,6 @@
 import http from '../../util/http'
 import log from '../../util/logger';
+import { AUTH_AUTHENTICATED } from '../../redux/actionTypes';
 
 // Write a synchronous outer function that receives the `text` parameter:
 const login = (username, password) => {
@@ -11,8 +12,8 @@ const login = (username, password) => {
       const loginAPI = { username, password };
 
       log.debug(`Calling login server for ${loginAPI.username}`);
-      const response = await http.get('https://www.ovallis.com/api/v1/status');
-      dispatch({ type: 'login/authenticated', payload: response })
+      const response = await http.get('https://jsonplaceholder.typicode.com/users');
+      dispatch({ type: AUTH_AUTHENTICATED, payload: response })
     }
   }
 
