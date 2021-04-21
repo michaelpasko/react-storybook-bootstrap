@@ -47,12 +47,14 @@ class Main extends React.Component {
     title: PropTypes.string,
     user: PropTypes.shape({}),
     isGerman: PropTypes.bool,
+    jwt: PropTypes.string,
   };
 
   static defaultProps = {
     title: 'Test - DEFAULT!',
     user: null,
-    isGerman: false
+    isGerman: false,
+    jwt: null,
   };
 
   // Component lifecycle

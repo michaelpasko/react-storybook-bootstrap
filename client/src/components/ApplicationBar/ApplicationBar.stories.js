@@ -12,7 +12,9 @@ const Template = (args) => <ApplicationBar {...args} />;
 export const NoUser = Template.bind({});
 NoUser.args = {
   title: 'Test Title',
-  user:null
+  user:null,
+  isGerman: false,
+  jwt:null
 };
 
 export const UserLoggedIn = Template.bind({});
@@ -21,5 +23,7 @@ UserLoggedIn.args = {
   user: {
     first: 'Michael',
     last: 'Pasko'
-  }
+  },
+  isGerman: false,
+  jwt:null
 };
