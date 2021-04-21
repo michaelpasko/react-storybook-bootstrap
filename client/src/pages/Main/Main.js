@@ -110,7 +110,7 @@ class Main extends React.Component {
     const { id } = this.props.match.params;
     return (
       <article>
-        <ApplicationBar title={this.props.t('main_appbar_title')} user={this.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
+        <ApplicationBar title={this.props.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
   
         <section>
           <div>
