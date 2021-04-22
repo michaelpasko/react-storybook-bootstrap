@@ -7,14 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "WIKI: Storybook",
+            "name": "CLIENT: Storybook",
             "cwd": "${workspaceFolder}/client",
             "runtimeExecutable": "yarn",
             "outputCapture": "std",
             "runtimeArgs": ["storybook"],
         },
         {
-            "name": "WIKI: Dev server",
+            "name": "CLIENT: Dev server",
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceFolder}/client",
@@ -22,6 +22,19 @@
             "runtimeArgs": ["start"],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen"
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "CLIENT: Unit Tests",
+            "cwd": "${workspaceFolder}/client",
+            "program": "${workspaceFolder}/client/node_modules/jest/bin/jest.js",
+            "args": [
+                "--verbose",
+                "--runInBand",
+                "--config=${workspaceFolder}/client/jest.config.js"
+            ],
+            "console": "integratedTerminal",
+        },
     ]
 }
