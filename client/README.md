@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The purpose of this project is to have a cohesive bootstraped React client on which to extend and utilize for any application.
+
+## Features
+1. React
+    * Code splitting example by route
+2. Redux
+    * Actions
+    * Reducers
+    * Thunks (allowing for async calls / processing)
+3. [I18next - internationalization-framework](https://www.i18next.com/) - English / German examples
+4. Jest Tests / Enzyme
+5. Webpack Analyzer
 
 ## Available Scripts
 
@@ -14,7 +25,7 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
+Launches Jest testing with coverage option<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
@@ -27,15 +38,18 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### `npm run storybook-build`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Builds [Storybook](https://storybook.js.org/) to allow for component level visualizations and development, without reloading the entire<br />
+application and forcing certain user flows to access it.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### `npm run storybook`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Runs [Storybook](https://storybook.js.org/) and allows [access to a visual setup](http://localhost:6006/) of the React components while you develop.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### `npm run analyze`
+
+Builds a visual representation of the production level webpack that is created, and analyze the sizes of each included module.
 
 ## Learn More
 
@@ -66,3 +80,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+# References
+
+### React / Jest / Enzyme
+https://itnext.io/how-to-unit-test-in-react-72e911e2b8d1
+https://www.toptal.com/react/tdd-react-unit-testing-enzyme-jest
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
