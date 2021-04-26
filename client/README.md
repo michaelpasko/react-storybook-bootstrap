@@ -1,15 +1,15 @@
 The purpose of this project is to have a cohesive bootstraped React client on which to extend and utilize for any application.
 
 ## Features
-1. React
+1. React (ver 16, waiting on Enzyme to upgrade to 17)
     * Code splitting example by route
 2. Redux
     * Actions
     * Reducers
     * Thunks (allowing for async calls / processing)
 3. [I18next - internationalization-framework](https://www.i18next.com/) - English / German examples
-4. Jest Tests / Enzyme
-5. Webpack Analyzer
+4. [Jest Tests](https://jestjs.io/) / [Enzyme](https://enzymejs.github.io/enzyme/) (waiting on [issue](https://github.com/enzymejs/enzyme/issues/2429) to resolve before upgrade to 17 )
+5. [Webpack Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
 
 ## Available Scripts
 

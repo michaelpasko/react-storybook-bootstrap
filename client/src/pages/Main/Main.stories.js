@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 
 import Main from './Main';
 import { store } from '../../redux/store';
-import * as ApplicationBarStories from '../../components/ApplicationBar/ApplicationBar.stories';
 
 import ProviderWrapper from '../../stories/ProviderWrapper';
 

@@ -27,7 +27,7 @@ export const Article = ({ article, ...props }) => {
   return (
     <div className="buttonGroup">
     <>
-      <Typography variant="h5" className={classes.title}>{title}</Typography>
+      <Typography variant="h5" className={classes.title}>{title}</Typography><br />
       <Typography className={classes.title}>{body}</Typography>
     </>
     </div>
