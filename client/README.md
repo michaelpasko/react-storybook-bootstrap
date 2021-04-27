@@ -82,8 +82,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 # References
-
+[GitHub Markup](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
 ### React / Jest / Enzyme
+https://www.sitepoint.com/test-react-components-jest/
 https://itnext.io/how-to-unit-test-in-react-72e911e2b8d1
 https://www.toptal.com/react/tdd-react-unit-testing-enzyme-jest
 
