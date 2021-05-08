@@ -7,6 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem'
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { connect } from 'react-redux';
@@ -30,17 +32,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+const height = 25;  
 const ApplicationBar =  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => { setAnchorEl(event.currentTarget); };
+  const handleClose = () => { setAnchorEl(null); };
+  const open = Boolean(anchorEl);
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton id="toolBarButton" aria-haspopup="true" className={classes.menuButton} color="inherit" aria-controls="menu" aria-label="menu" onClick={handleClick}>
             <MenuIcon />
           </IconButton>
+
+          <Menu
+            id="menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose} 
+            PaperProps={{  
+              style: {  
+                maxHeight: height * 5,  
+                width: 200,  
+              },  
+            }}
+          >
+            <MenuItem key="Profile" onClick={handleClose}>Profile</MenuItem>
+            <MenuItem key="Account" onClick={handleClose}>My account</MenuItem>
+            <MenuItem key="Logout" onClick={handleClose}>Logout</MenuItem>
+          </Menu>
           <Typography variant="h6" className={classes.title}>
             {title}
           </Typography>
