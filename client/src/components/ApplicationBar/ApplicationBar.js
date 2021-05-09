@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { Link, withRouter } from 'react-router-dom';
+import { withStyles, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,10 +13,11 @@ import MenuItem from '@material-ui/core/MenuItem'
 import MenuIcon from '@material-ui/icons/Menu';
 
 import { connect } from 'react-redux';
+import { withTranslation } from "react-i18next";
 import { login as actionLogin } from '../../redux/actions';
 import log from '../../util/logger';
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -30,80 +32,89 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-}));
+});
 
 const height = 25;  
-const ApplicationBar =  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+class ApplicationBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { anchorEl: null };
+  }
 
-  const handleClick = (event) => { setAnchorEl(event.currentTarget); };
-  const handleClose = () => { setAnchorEl(null); };
-  const open = Boolean(anchorEl);
+  static propTypes = {
+    title: PropTypes.string,
+    user: PropTypes.object,
+    onLogout: PropTypes.func,
+    onLogin: PropTypes.func,
+    onCreateAccount: PropTypes.func
+  };
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton id="toolBarButton" aria-haspopup="true" className={classes.menuButton} color="inherit" aria-controls="menu" aria-label="menu" onClick={handleClick}>
-            <MenuIcon />
-          </IconButton>
+  static defaultProps = {
+    title: 'Default Title',
+    user: null
+  };
 
-          <Menu
-            id="menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose} 
-            PaperProps={{  
-              style: {  
-                maxHeight: height * 5,  
-                width: 200,  
-              },  
-            }}
-          >
-            <MenuItem key="Profile" onClick={handleClose}>Profile</MenuItem>
-            <MenuItem key="Account" onClick={handleClose}>My account</MenuItem>
-            <MenuItem key="Logout" onClick={handleClose}>Logout</MenuItem>
-          </Menu>
-          <Typography variant="h6" className={classes.title}>
-            {title}
-          </Typography>
-          <div className={classes.buttonGroup}>
-            {user ? (
-              <>
-                <Typography variant="contained" className={classes.title}>{user.first} {user.last}</Typography>
-                <Button variant="contained" color="primary" onClick={onLogout}>Logout</Button>
-              </>
-            ) : (
-              <>
-                <Button variant="contained" color="primary" onClick={onLogin}>Login</Button>
-                <Button variant="contained" color="secondary" onClick={onCreateAccount}>Sign up</Button>
-              </>
-            )}
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+  setAnchorEl = (newValue) => {
+    this.setState((state) => {
+      return { ...state, anchorEl: newValue };
+    });
+  }
+
+  render = () => {
+    //=  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
+    const { classes } = this.props;
+
+    const handleClick = (event) => { this.setAnchorEl(event.currentTarget); };
+    const handleClose = () => { this.setAnchorEl(null); };
+    const open = Boolean(this.state.anchorEl);
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton id="toolBarButton" aria-haspopup="true" className={classes.menuButton} color="inherit" aria-controls="menu" aria-label="menu" onClick={handleClick}>
+              <MenuIcon />
+            </IconButton>
+
+            <Menu
+              id="menu"
+              anchorEl={this.state.anchorEl}
+              keepMounted
+              open={open}
+              onClose={handleClose} 
+              PaperProps={{  
+                style: {  
+                  maxHeight: height * 5,  
+                  width: 200,  
+                },  
+              }}
+            >
+              <MenuItem key="Home" onClick={handleClose}><Link to="/home">Home</Link></MenuItem>
+              <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">Profile</Link></MenuItem>
+            </Menu>
+            <Typography variant="h6" className={classes.title}>
+              {this.title}
+            </Typography>
+            <div className={classes.buttonGroup}>
+              {this.user ? (
+                <>
+                  <Typography variant="contained" className={classes.title}>{this.user.first} {this.user.last}</Typography>
+                  <Button variant="contained" color="primary" onClick={this.onLogout}>Logout</Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="contained" color="primary" onClick={this.onLogin}>Login</Button>
+                  <Button variant="contained" color="secondary" onClick={this.onCreateAccount}>Sign up</Button>
+                </>
+              )}
+            </div>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 };
-
-ApplicationBar.propTypes = {
-  title: PropTypes.string,
-  user: PropTypes.object,
-  onLogout: PropTypes.func,
-  onLogin: PropTypes.func,
-  onCreateAccount: PropTypes.func
-};
-
-ApplicationBar.defaultProps = {
-  title: 'Default Title',
-  user: null
-};
-
-const mapStateToProps = (state /*, ownProps*/) => {
-};
-
+  
 const mapDispatchToProps = dispatch => {
   log.debug('Match dispatch to props in application bar');
   return {
@@ -111,8 +122,7 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-connect(mapStateToProps, mapDispatchToProps)(ApplicationBar);
-
+const ApplicationBarHOC = withRouter(connect(mapDispatchToProps)(withStyles(styles)(withTranslation()(ApplicationBar))));
 export {
-  ApplicationBar
+  ApplicationBarHOC as ApplicationBar,
 }

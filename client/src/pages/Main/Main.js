@@ -12,7 +12,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 // Internationalization
-import il8n from '../../util/il8n';
+import { withTranslation } from "react-i18next";
+// import il8n from '../../util/il8n';
 
 import { ApplicationBar } from '../../components/ApplicationBar/ApplicationBar';
 import { Splash } from '../../components/Splash/Splash';
@@ -113,10 +114,10 @@ class Main extends React.Component {
 
     return (
       <article>
-        <ApplicationBar title={il8n.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
+        <ApplicationBar t={this.props.t} title={this.props.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
 
         <section>
-          <Button variant="contained" color="primary" onClick={this.handleLanguageChange}>{il8n.t("main_change_language_button")}</Button>
+          <Button variant="contained" color="primary" onClick={this.handleLanguageChange}>{this.props.t("main_change_language_button")}</Button>
           <br />
           {this.props.subPage}
           <h3>Test Data</h3>
@@ -124,10 +125,10 @@ class Main extends React.Component {
         </section>
 
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">{il8n.t("login_form_title")}</DialogTitle>
+            <DialogTitle id="form-dialog-title">{this.props.t("login_form_title")}</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                {il8n.t("login_form_email_password")}
+                {this.props.t("login_form_email_password")}
               </DialogContentText>
               <TextField
                 autoFocus
@@ -147,10 +148,10 @@ class Main extends React.Component {
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
-                {il8n.t("login_form_cancel_button")}
+                {this.props.t("login_form_cancel_button")}
               </Button>
               <Button onClick={this.handleLoginCheck} color="primary">
-                {il8n.t("login_form_login_button")}
+                {this.props.t("login_form_login_button")}
               </Button>
             </DialogActions>
           </Dialog>
@@ -167,4 +168,4 @@ const mapStateToProps = (state , ownProps) => {
   }
 };
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps)(withTranslation()(Main)));

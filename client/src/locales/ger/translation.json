@@ -10,5 +10,6 @@
     "login_form_email_password": "Geben Sie bitte Ihre E-Mail-Adresse und Ihr Passwort ein, um sich auf dieser Website anzumelden",
     "login_form_title": "Abonnieren",
     "login_form_cancel_button": "Stornieren",
-    "login_form_login_button": "Anmeldung"
+    "login_form_login_button": "Anmeldung",
+    "profile_intro": "Willkommen auf Ihrer Profilseite!"
 }
