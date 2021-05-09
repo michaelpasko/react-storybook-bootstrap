@@ -112,6 +112,9 @@ class Main extends React.Component {
     const query = new URLSearchParams(this.props.location.search);;//new URLSearchParams(locationURL.search);
     const { id } = this.props.match.params;
 
+    const list = [];
+    query.forEach((value, key) => list.push(<li>Key: {key} - value: {value} </li>));
+
     return (
       <article>
         <ApplicationBar t={this.props.t} title={this.props.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
@@ -121,7 +124,13 @@ class Main extends React.Component {
           <br />
           {this.props.subPage}
           <h3>Test Data</h3>
-          <div>ID: {id}<br />TestLink: {testLinkId}<br />queryParameter: {query}</div>
+          <div>ID: {id}<br />TestLink: {testLinkId}</div>
+          <div className="container">
+            Query Parameters:
+            <ul>
+            {list}
+            </ul>
+          </div>
         </section>
 
         <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">

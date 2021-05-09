@@ -91,6 +91,7 @@ class ApplicationBar extends React.Component {
             >
               <MenuItem key="Home" onClick={handleClose}><Link to="/home">Home</Link></MenuItem>
               <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">Profile</Link></MenuItem>
+              <MenuItem key="HomeWithQueryParam" onClick={handleClose}><Link to="/home?test=1&tewrw=sdf">HomeWithQueryParam</Link></MenuItem>
             </Menu>
             <Typography variant="h6" className={classes.title}>
               {this.title}
