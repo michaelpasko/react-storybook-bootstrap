@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // Material UI
@@ -27,13 +27,6 @@ import { login as actionLogin } from '../../redux/thunks/loginThunk';
 import { changeLanguage as actionChangeLanguage } from '../../redux/actions';
 
 import './main.css';
-
-const standardArticle = {
-  title: 'This is an example title',
-  body: 'Render pages with mock data. This makes it easy to build and review page states without\
-        needing to navigate to them in your app. Here are some handy patterns for managing page data\
-        in Storybook:',
-};
 
 /**
  * Main entry page for the Application
@@ -113,7 +106,7 @@ class Main extends React.Component {
     const { id } = this.props.match.params;
 
     const list = [];
-    query.forEach((value, key) => list.push(<li>Key: {key} - value: {value} </li>));
+    query.forEach((value, key) => list.push(<li key={key}>Key: {key} - value: {value} </li>));
 
     return (
       <article>

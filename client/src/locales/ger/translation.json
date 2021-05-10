@@ -11,5 +11,11 @@
     "login_form_title": "Abonnieren",
     "login_form_cancel_button": "Stornieren",
     "login_form_login_button": "Anmeldung",
-    "profile_intro": "Willkommen auf Ihrer Profilseite!"
+    "profile_intro": "Willkommen auf Ihrer Profilseite!",
+    "appbar_home": "Zuhause",
+    "appbar_profile": "Profil",
+    "appbar_query_param": "Startseite mit Abfrageparametern",
+    "appbar_login": "Anmeldung",
+    "appbar_logout": "Ausloggen",
+    "appbar_signup": "Anmeldung"
 }

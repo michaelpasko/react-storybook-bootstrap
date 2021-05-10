@@ -11,5 +11,11 @@
     "login_form_title": "Subscribe",
     "login_form_cancel_button": "Cancel",
     "login_form_login_button": "Login",
-    "profile_intro": "Welcome to your Profile page!"
+    "profile_intro": "Welcome to your Profile page!",
+    "appbar_home": "Home",
+    "appbar_profile": "Profile",
+    "appbar_query_param": "Home With Query Parameters",
+    "appbar_login": "Login",
+    "appbar_logout": "Logout",
+    "appbar_signup": "Sign Up"
 }

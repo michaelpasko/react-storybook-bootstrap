@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Link, withRouter } from 'react-router-dom';
-import { withStyles, createStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -61,7 +61,6 @@ class ApplicationBar extends React.Component {
   }
 
   render = () => {
-    //=  ({ title, user, onLogout, onLogin, onCreateAccount, ...props }) => {
     const { classes } = this.props;
 
     const handleClick = (event) => { this.setAnchorEl(event.currentTarget); };
@@ -85,27 +84,27 @@ class ApplicationBar extends React.Component {
               PaperProps={{  
                 style: {  
                   maxHeight: height * 5,  
-                  width: 200,  
+                  width: 300,  
                 },  
               }}
             >
-              <MenuItem key="Home" onClick={handleClose}><Link to="/home">Home</Link></MenuItem>
-              <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">Profile</Link></MenuItem>
-              <MenuItem key="HomeWithQueryParam" onClick={handleClose}><Link to="/home?test=1&tewrw=sdf">HomeWithQueryParam</Link></MenuItem>
+              <MenuItem key="Home" onClick={handleClose}><Link to="/home">{this.props.t("appbar_home")}</Link></MenuItem>
+              <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">{this.props.t("appbar_profile")}</Link></MenuItem>
+              <MenuItem key="HomeWithQueryParam" onClick={handleClose}><Link to="/home?test=1&tewrw=sdf">{this.props.t("appbar_query_param")}</Link></MenuItem>
             </Menu>
             <Typography variant="h6" className={classes.title}>
               {this.title}
             </Typography>
             <div className={classes.buttonGroup}>
-              {this.user ? (
+              {this.props.user ? (
                 <>
-                  <Typography variant="contained" className={classes.title}>{this.user.first} {this.user.last}</Typography>
-                  <Button variant="contained" color="primary" onClick={this.onLogout}>Logout</Button>
+                  <Typography variant="contained" className={classes.title}>{this.props.user.first} {this.props.user.last}</Typography>
+                  <Button variant="contained" color="primary" onClick={this.props.onLogout}>{this.props.t("appbar_logout")}</Button>
                 </>
               ) : (
                 <>
-                  <Button variant="contained" color="primary" onClick={this.onLogin}>Login</Button>
-                  <Button variant="contained" color="secondary" onClick={this.onCreateAccount}>Sign up</Button>
+                  <Button variant="contained" color="primary" onClick={this.props.onLogin}>{this.props.t("appbar_login")}</Button>
+                  <Button variant="contained" color="secondary" onClick={this.props.onCreateAccount}>{this.props.t("appbar_signup")}</Button>
                 </>
               )}
             </div>

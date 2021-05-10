@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from "react-i18next";
 
 // Internationalization
-import i18next from '../../util/il8n';
+import { withTranslation } from "react-i18next";
+
 import './splash.css';
 
-class SplashComponent extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
+class Splash extends React.PureComponent {
 
   static propTypes = {
     title: PropTypes.string,
@@ -43,8 +40,8 @@ class SplashComponent extends React.PureComponent {
   }
 };
 
-const Splash = withTranslation()(SplashComponent);
+const SplashHOC = withTranslation()(Splash);
 
 export {
-  Splash,
+  SplashHOC as Splash,
 }

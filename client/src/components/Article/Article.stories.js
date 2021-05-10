@@ -2,6 +2,17 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Article } from './Article';
 
+// HOC component depndencies
+import { Route } from 'react-router-dom';
+import { store } from '../../redux/store';
+import ProviderWrapper from '../../stories/ProviderWrapper';
+
+const withProvider = (story) => (
+  <ProviderWrapper store={store}>
+    <Route path="*" component={(args) => story(args)} /> 
+  </ProviderWrapper>
+);
+
 // https://www.lipsum.com/
 const AritcleWithData = {
   article: {
@@ -15,5 +26,6 @@ const AritcleWithNoData = {
 };
 
 const stories = storiesOf('Components/Article', module);
+stories.addDecorator(withProvider);
 stories.add('Detail', () => <Article { ...AritcleWithData } />);
 stories.add('Defaults', () => <Article { ...AritcleWithNoData } />);
