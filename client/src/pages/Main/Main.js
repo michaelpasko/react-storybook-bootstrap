@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -23,7 +23,7 @@ import log from '../../util/logger';
 // Redux
 import { connect } from 'react-redux';
 import { dispatch } from '../../redux/store';
-import { login as actionLogin } from '../../redux/thunks/loginThunk';
+import { login as actionLogin, logout as actionLogout } from '../../redux/thunks/loginThunk';
 import { changeLanguage as actionChangeLanguage } from '../../redux/actions';
 
 import './main.css';
@@ -69,12 +69,13 @@ class Main extends React.Component {
   }
 
   // UI Handlers
- handleLogin = (eventPayload) => {
+  handleLogin = (eventPayload) => {
     log.debug('----- Debugging handleLogin -------');
     this.setState({ ...this.state, open: true });
   };
 
   handleLoginCheck = (username='Test', password='TestPass') => {
+    log.debug('----- Debugging handleLoginCheck -------');
     dispatch(actionLogin('TestUser', 'TestPass'));
   };
 
@@ -85,6 +86,7 @@ class Main extends React.Component {
 
   handleLogout = (eventPayload) => {
     log.debug('----- Debugging handleLogout -------');
+    dispatch(actionLogout());
   };
 
   handleLanguageChange = (eventPayload) => {
@@ -110,12 +112,14 @@ class Main extends React.Component {
 
     return (
       <article>
-        <ApplicationBar t={this.props.t} title={this.props.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
+        <ApplicationBar title={this.props.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
 
         <section>
           <Button variant="contained" color="primary" onClick={this.handleLanguageChange}>{this.props.t("main_change_language_button")}</Button>
           <br />
-          {this.props.subPage}
+          <Suspense fallback={<div>Loading...</div>}>
+            {this.props.subPage}
+          </Suspense>
           <h3>Test Data</h3>
           <div>ID: {id}<br />TestLink: {testLinkId}</div>
           <div className="container">
@@ -162,9 +166,13 @@ class Main extends React.Component {
   }
 };
 
+
 const mapStateToProps = (state , ownProps) => {
   log.debug('----- Mapping Redux State to Props-------');
   return {
+    ...state,
+    open: false,
+    user: state.login.user,
     isGerman: state.il8n.isGerman,
     jwt: state.login.jwt
   }

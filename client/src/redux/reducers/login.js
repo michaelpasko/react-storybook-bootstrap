@@ -1,4 +1,5 @@
-import { AUTH_LOGIN, AUTH_AUTHENTICATED } from '../actionTypes';
+import jwt from "jsonwebtoken";
+import { AUTH_LOGIN, AUTH_AUTHENTICATED, AUTH_LOGOUT } from '../actionTypes';
 import log from '../../util/logger';
 
 const initialState = {
@@ -28,11 +29,35 @@ export default function loginReducer(state = initialState, action) {
         }
         case AUTH_AUTHENTICATED: {
           log.debug('Authenticated, move to main page');
+          const user = {
+            first: 'FirstNameTest',
+            last: 'LastNameTest'
+          };
+          if (action.payload && action.payload.length > 0 ) {
+            const name = action.payload[0].name.split(' ');
+            user.first = name[0];
+            user.last = name[1];
+          }
+
+          // Create JWT token
+          const token = jwt.sign(user, 'password', {
+            algorithm: "HS256",
+            expiresIn: 600000,
+          });
+
           return {
             // that has all the existing state data
             ...state,
-            jwt: true
+            user,
+            jwt: token,
           };
+        }
+        case AUTH_LOGOUT: {
+          return {
+            ...state,
+            user: null,
+            jwt: null
+          }
         }
         // Do something here based on the different types of actions
         default:

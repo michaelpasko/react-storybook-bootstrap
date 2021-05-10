@@ -15,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { connect } from 'react-redux';
 import { withTranslation } from "react-i18next";
 import { login as actionLogin } from '../../redux/actions';
+import { dispatch } from '../../redux/store';
 import log from '../../util/logger';
 
 const styles = (theme) => ({
@@ -114,15 +115,7 @@ class ApplicationBar extends React.Component {
     );
   }
 };
-  
-const mapDispatchToProps = dispatch => {
-  log.debug('Match dispatch to props in application bar');
-  return {
-    onLogin: (username, password) => dispatch(actionLogin(username, password))
-  }
-};
-
-const ApplicationBarHOC = withRouter(connect(mapDispatchToProps)(withStyles(styles)(withTranslation()(ApplicationBar))));
+const ApplicationBarHOC = withRouter((withStyles(styles)(withTranslation()(ApplicationBar))));
 export {
   ApplicationBarHOC as ApplicationBar,
 }

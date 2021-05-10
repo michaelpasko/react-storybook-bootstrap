@@ -3,12 +3,13 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Pages
 //import { Main } from './pages/Main/Main';
-import { Splash } from './components/Splash/Splash';
+//import { Splash } from './components/Splash/Splash';
 import { Profile } from './components/Profile/Profile';
 
 
 // Pages / Chunks to create
 const Main = lazy(() => import('./pages/Main/Main'));
+const Splash = lazy(() => import('./components/Splash/SplashPage'));
 
 export const Routes = () => {
   return (

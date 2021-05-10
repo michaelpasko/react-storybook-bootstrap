@@ -1,6 +1,3 @@
-import uuid from 'uuid'
-
-
 import { dispatch } from '../redux/store';
 import { actionTypes } from '../redux/actionTypes';
 import log from './logger';
