@@ -15,7 +15,8 @@
     "appbar_home": "Zuhause",
     "appbar_profile": "Profil",
     "appbar_query_param": "Startseite mit Abfrageparametern",
+    "appbar_charts": "Diagramme",
     "appbar_login": "Anmeldung",
     "appbar_logout": "Ausloggen",
-    "appbar_signup": "Anmeldung"
+    "appbar_signup": "Registrieren"
 }

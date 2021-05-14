@@ -15,6 +15,7 @@
     "appbar_home": "Home",
     "appbar_profile": "Profile",
     "appbar_query_param": "Home With Query Parameters",
+    "appbar_charts": "Charts",
     "appbar_login": "Login",
     "appbar_logout": "Logout",
     "appbar_signup": "Sign Up"

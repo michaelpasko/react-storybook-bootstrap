@@ -10,7 +10,6 @@ const login = (username, password) => {
     // const testState = getState();
     // Now we can use the text value and send it to the server
     const loginAPI = { username, password };
-
     log.debug(`Calling login server for ${loginAPI.username}`);
     const response = await http.get('https://jsonplaceholder.typicode.com/users');
     dispatch({ type: AUTH_AUTHENTICATED, payload: response })

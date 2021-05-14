@@ -11,12 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem'
 import MenuIcon from '@material-ui/icons/Menu';
-
-import { connect } from 'react-redux';
 import { withTranslation } from "react-i18next";
-import { login as actionLogin } from '../../redux/actions';
-import { dispatch } from '../../redux/store';
-import log from '../../util/logger';
 
 const styles = (theme) => ({
   root: {
@@ -84,14 +79,16 @@ class ApplicationBar extends React.Component {
               onClose={handleClose} 
               PaperProps={{  
                 style: {  
-                  maxHeight: height * 5,  
-                  width: 300,  
+                  maxHeight: height * 8,  
+                  width: 300,
+                  marginTop: 50,
                 },  
               }}
             >
               <MenuItem key="Home" onClick={handleClose}><Link to="/home">{this.props.t("appbar_home")}</Link></MenuItem>
               <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">{this.props.t("appbar_profile")}</Link></MenuItem>
               <MenuItem key="HomeWithQueryParam" onClick={handleClose}><Link to="/home?test=1&tewrw=sdf">{this.props.t("appbar_query_param")}</Link></MenuItem>
+              <MenuItem key="Charts" onClick={handleClose}><Link to="/charts">{this.props.t("appbar_charts")}</Link></MenuItem>
             </Menu>
             <Typography variant="h6" className={classes.title}>
               {this.title}

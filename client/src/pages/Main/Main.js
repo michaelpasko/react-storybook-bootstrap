@@ -16,7 +16,7 @@ import { withTranslation } from "react-i18next";
 // import il8n from '../../util/il8n';
 
 import { ApplicationBar } from '../../components/ApplicationBar/ApplicationBar';
-import { Splash } from '../../components/Splash/Splash';
+import { Splash } from '../Splash/Splash';
 
 import log from '../../util/logger';
 
