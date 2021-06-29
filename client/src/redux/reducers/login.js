@@ -2,22 +2,10 @@ import jwt from "jsonwebtoken";
 import { AUTH_LOGIN, AUTH_AUTHENTICATED, AUTH_LOGOUT } from '../actionTypes';
 import log from '../../util/logger';
 
-const initialState = {
-    todos: [
-      { id: 0, text: 'Learn React', completed: true },
-      { id: 1, text: 'Learn Redux', completed: false, color: 'purple' },
-      { id: 2, text: 'Build something fun!', completed: false, color: 'blue' }
-    ],
-    filters: {
-      status: 'All',
-      colors: []
-    }
-  };
   
-export default function loginReducer(state = initialState, action) {
+export default function loginReducer(state = {}, action) {
 
-    log.info('======== Login Reducer called ==============')
-    log.debug(action);
+    log.info('======== Login Reducer called ==============');
     // The reducer normally looks at the action type field to decide what happens
     switch (action.type) {
         case AUTH_LOGIN: {

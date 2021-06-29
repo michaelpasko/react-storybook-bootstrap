@@ -5,8 +5,7 @@ import il8n from '../../util/il8n';
   
 export default function il8nReducer(state = {}, action) {
 
-    log.info('======== il8nReducer Reducer called ==============')
-    log.debug(action);
+    log.info('======== il8nReducer Reducer called ==============');
     // The reducer normally looks at the action type field to decide what happens
     switch (action.type) {
         case INTL_CHANGE_LANGUAGE: {

@@ -168,7 +168,7 @@ class Main extends React.Component {
 
 
 const mapStateToProps = (state , ownProps) => {
-  log.debug('----- Mapping Redux State to Props-------');
+  log.debug('----- Mapping Redux State to Props for Main Page-------');
   return {
     ...state,
     open: false,
