@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Link, withRouter } from 'react-router-dom';
@@ -12,6 +13,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem'
 import MenuIcon from '@material-ui/icons/Menu';
 import { withTranslation } from "react-i18next";
+
+import log from '../../util/logger';
+import { dispatch } from '../../redux/store';
+import { changeLanguage as actionChangeLanguage } from '../../redux/actions';
 
 const styles = (theme) => ({
   root: {
@@ -39,15 +44,26 @@ class ApplicationBar extends React.Component {
 
   static propTypes = {
     title: PropTypes.string,
-    user: PropTypes.object,
+    user: PropTypes.object, //  user: PropTypes.shape({}),
     onLogout: PropTypes.func,
     onLogin: PropTypes.func,
-    onCreateAccount: PropTypes.func
+    onCreateAccount: PropTypes.func,
+    isGerman: PropTypes.bool,
   };
 
   static defaultProps = {
     title: 'Default Title',
-    user: null
+    user: null,
+    isGerman: false
+  };
+
+  handleLanguageChange = (eventPayload) => {
+    log.debug('----- Debugging handleLogout -------');
+    if (this.props.isGerman) {
+      dispatch(actionChangeLanguage('en'));
+    } else {
+      dispatch(actionChangeLanguage('ger'));
+    }
   };
 
   setAnchorEl = (newValue) => {
@@ -63,6 +79,23 @@ class ApplicationBar extends React.Component {
     const handleClose = () => { this.setAnchorEl(null); };
     const open = Boolean(this.state.anchorEl);
 
+    let menu;
+    if (this.props.user) {
+      menu = (
+        <div>
+          <MenuItem key="Home" onClick={handleClose}><Link to="/home">{this.props.t("appbar_home")}</Link></MenuItem>
+          <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">{this.props.t("appbar_profile")}</Link></MenuItem>
+          <MenuItem key="HomeWithQueryParam" onClick={handleClose}><Link to="/home?test=1&tewrw=sdf">{this.props.t("appbar_query_param")}</Link></MenuItem>
+          <MenuItem key="Charts" onClick={handleClose}><Link to="/charts">{this.props.t("appbar_charts")}</Link></MenuItem>
+        </div>
+      );
+    } else {
+      menu = (
+        <div>
+          <MenuItem key="Home" onClick={handleClose}><Link to="/home">{this.props.t("appbar_home")}</Link></MenuItem>
+        </div>
+      )
+    }
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -85,11 +118,9 @@ class ApplicationBar extends React.Component {
                 },  
               }}
             >
-              <MenuItem key="Home" onClick={handleClose}><Link to="/home">{this.props.t("appbar_home")}</Link></MenuItem>
-              <MenuItem key="Profile" onClick={handleClose}><Link to="/profile">{this.props.t("appbar_profile")}</Link></MenuItem>
-              <MenuItem key="HomeWithQueryParam" onClick={handleClose}><Link to="/home?test=1&tewrw=sdf">{this.props.t("appbar_query_param")}</Link></MenuItem>
-              <MenuItem key="Charts" onClick={handleClose}><Link to="/charts">{this.props.t("appbar_charts")}</Link></MenuItem>
+              {menu}
             </Menu>
+            <Button variant="contained" color="primary" onClick={this.handleLanguageChange}>{this.props.t("main_change_language_button")}</Button>
             <Typography variant="h6" className={classes.title}>
               {this.title}
             </Typography>
@@ -112,7 +143,18 @@ class ApplicationBar extends React.Component {
     );
   }
 };
-const ApplicationBarHOC = withRouter((withStyles(styles)(withTranslation()(ApplicationBar))));
+
+const mapStateToProps = ({ il8n, login } , ownProps) => {
+  log.debug('----- Mapping Redux State to Props for Main Page-------');
+  return {
+    user: login ? login.user : null,
+    isGerman: il8n ? il8n.isGerman : null,
+    jwt: login ? login.jwt : null
+  }
+};
+
+
+const ApplicationBarHOC = withRouter(connect(mapStateToProps)((withStyles(styles)(withTranslation()(ApplicationBar)))));
 export {
   ApplicationBarHOC as ApplicationBar,
 }

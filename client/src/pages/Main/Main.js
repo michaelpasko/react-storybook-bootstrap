@@ -24,7 +24,6 @@ import log from '../../util/logger';
 import { connect } from 'react-redux';
 import { dispatch } from '../../redux/store';
 import { login as actionLogin, logout as actionLogout } from '../../redux/thunks/loginThunk';
-import { changeLanguage as actionChangeLanguage } from '../../redux/actions';
 
 import './main.css';
 
@@ -34,14 +33,12 @@ import './main.css';
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state= { open: false, isGerman: this.props.isGerman };
+    this.state= { open: false };
   }
 
   static propTypes = {
     title: PropTypes.string,
     subPage: PropTypes.element,
-    user: PropTypes.shape({}),
-    isGerman: PropTypes.bool,
     jwt: PropTypes.string,
   };
 
@@ -49,7 +46,6 @@ class Main extends React.Component {
     title: 'Test - DEFAULT!',
     subPage: <Splash/>,
     user: null,
-    isGerman: false,
     jwt: null,
   };
 
@@ -57,7 +53,6 @@ class Main extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       ...prevState,
-     isGerman: nextProps.isGerman,
     };
   };
 
@@ -74,9 +69,15 @@ class Main extends React.Component {
     this.setState({ ...this.state, open: true });
   };
 
-  handleLoginCheck = (username='Test', password='TestPass') => {
-    log.debug('----- Debugging handleLoginCheck -------');
-    dispatch(actionLogin('TestUser', 'TestPass'));
+  handleLoginCheck = (event) => {
+    try {
+      const username = this.state.username;
+      const password = this.state.password;
+      log.debug('----- Debugging handleLoginCheck -------');
+      dispatch(actionLogin(username, password));
+    } catch (e) {
+      log.error(e);
+    }
   };
 
   handleClose = (eventPayload) => {
@@ -87,15 +88,6 @@ class Main extends React.Component {
   handleLogout = (eventPayload) => {
     log.debug('----- Debugging handleLogout -------');
     dispatch(actionLogout());
-  };
-
-  handleLanguageChange = (eventPayload) => {
-    log.debug('----- Debugging handleLogout -------');
-    if (this.state.isGerman) {
-      dispatch(actionChangeLanguage('en'));
-    } else {
-      dispatch(actionChangeLanguage('ger'));
-    }
   };
 
   handleOnCreateAccount = (eventPayload) => {
@@ -115,7 +107,6 @@ class Main extends React.Component {
         <ApplicationBar title={this.props.t('main_appbar_title')} user={this.props.user} onLogin={this.handleLogin} onLogout={this.handleLogout} onCreateAccount={this.handleOnCreateAccount} />
 
         <section>
-          <Button variant="contained" color="primary" onClick={this.handleLanguageChange}>{this.props.t("main_change_language_button")}</Button>
           <br />
           <Suspense fallback={<div>Loading...</div>}>
             {this.props.subPage}
@@ -141,14 +132,17 @@ class Main extends React.Component {
                 margin="dense"
                 id="username"
                 label="Username"
+                value={this.state.username}
+                onChange={(e) => this.setState({ username: e.target.value }) } 
                 fullWidth
               />
               <TextField
-                autoFocus
                 margin="dense"
                 id="password"
                 label="Password"
                 type="password"
+                value={this.state.password}
+                onChange={(e) => this.setState({ password: e.target.value }) } 
                 fullWidth
               />
             </DialogContent>
@@ -172,8 +166,6 @@ const mapStateToProps = (state , ownProps) => {
   return {
     ...state,
     open: false,
-    user: state.login.user,
-    isGerman: state.il8n.isGerman,
     jwt: state.login.jwt
   }
 };
