@@ -78,8 +78,9 @@ class ApplicationBar extends React.Component {
     const handleClick = (event) => { this.setAnchorEl(event.currentTarget); };
     const handleClose = () => { this.setAnchorEl(null); };
     const open = Boolean(this.state.anchorEl);
+    const userName = this.props.user ? `${this.props.user.first} ${this.props.user.last}` : null;
 
-    let menu;
+    let menu = <div />;
     if (this.props.user) {
       menu = (
         <div>
@@ -96,6 +97,7 @@ class ApplicationBar extends React.Component {
         </div>
       )
     }
+
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -127,7 +129,7 @@ class ApplicationBar extends React.Component {
             <div className={classes.buttonGroup}>
               {this.props.user ? (
                 <>
-                  <Typography variant="contained" className={classes.title}>{this.props.user.first} {this.props.user.last}</Typography>
+                  {userName}
                   <Button variant="contained" color="primary" onClick={this.props.onLogout}>{this.props.t("appbar_logout")}</Button>
                 </>
               ) : (

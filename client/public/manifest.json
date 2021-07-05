@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Frontend Template",
+  "name": "Frontend Template Example",
   "icons": [
     {
       "src": "favicon.ico",

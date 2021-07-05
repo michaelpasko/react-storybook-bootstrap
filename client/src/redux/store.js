@@ -27,7 +27,7 @@ if (persistedStore) {
 
 // Setup redux devtools extension - https://medium.com/@zalmoxis/improve-your-development-workflow-with-redux-devtools-extension-f0379227ff83
 const devTools = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-const composeEnhancers = compose(applyMiddleware(asyncFunctionMiddleware) , devTools);
+const composeEnhancers = compose(applyMiddleware(asyncFunctionMiddleware));
 
 // Create the Redux Store
 const store = createStore(rootReducer, preloadedState, composeEnhancers);
